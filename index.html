@@ -152,7 +152,7 @@ body{
 }
 
 .info-key{
-  width:56px;
+  width:80px;
   flex-shrink:0;
   font-weight:600;
   letter-spacing:0.12em;
@@ -160,7 +160,7 @@ body{
   font-size:13px;
 }
 
-.info-val{color:var(--ink-2)}
+.info-val{color:var(--ink-2);flex:1;min-width:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .info-val.active{
   color:var(--red);
@@ -440,14 +440,14 @@ body{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
   gap:0;
-  border:var(--rule);
 }
 
 /* ── PROJECT CARD ── */
 .pcard{
   padding:22px 22px 20px;
-  border-right:var(--rule);
-  border-bottom:var(--rule);
+  border:var(--rule);
+  margin-right:-1px;
+  margin-bottom:-1px;
   cursor:pointer;
   position:relative;
   transition:background 0.15s;
@@ -456,8 +456,7 @@ body{
 
 .pcard:hover{background:var(--ink-5)}
 
-/* removes double border on last col */
-.pcard:nth-child(3n){border-right:none}
+
 
 /* top red rule slides in on hover */
 .pcard::before{
@@ -869,7 +868,7 @@ footer{
   <div class="masthead-right fi d2">
     <div class="info-row"><span class="info-key">Role</span><span class="info-val">Software Engineer &amp; Data Developer</span></div>
     <div class="info-row"><span class="info-key">Focus</span><span class="info-val">Software · Data · AI / ML</span></div>
-    <div class="info-row" style="align-items:baseline">
+    <div class="info-row" style="align-items:flex-start">
       <span class="info-key" style="padding-top:0">Services</span>
       <span class="info-val">Build custom software · Automate workflows · Data pipelines &amp; analytics · AI / LLM integration · Consulting · Freelance projects</span>
     </div>
