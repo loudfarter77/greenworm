@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Green Worm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk+Display+Pro:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<!-- fallback if Neue Haas not available -->
+<style>
+
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#fafaf8;
+  --ink:#111110;
+  --ink-2:#444440;
+  --ink-3:#888884;
+  --ink-4:#bbbbB6;
+  --ink-5:#e8e8e4;
+  --rule:1px solid #d8d8d4;
+  --rule-strong:1px solid #111110;
+  --red:#c8001e;
+  --sans:'Helvetica Neue','Helvetica',Arial,sans-serif;
+  --serif:'Helvetica Neue','Helvetica',Arial,sans-serif;
+  --col:72px; /* grid column unit */
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── LOAD ── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes ruleGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.fi{opacity:0;animation:fadeIn 0.5s ease forwards}
+.su{opacity:0;animation:slideUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards}
+.d1{animation-delay:0.05s}
+.d2{animation-delay:0.15s}
+.d3{animation-delay:0.25s}
+.d4{animation-delay:0.35s}
+.d5{animation-delay:0.45s}
+.d6{animation-delay:0.55s}
+.d7{animation-delay:0.65s}
+.d8{animation-delay:0.75s}
+
+/* ── MASTHEAD ── */
+.masthead{
+  border-bottom:var(--rule-strong);
+  display:flex;
+  flex-direction:column;
+  padding:0 48px;
+}
+
+.masthead-left{
+  padding:40px 0 28px;
+  border-bottom:var(--rule);
+}
+
+.masthead-kicker{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.masthead-kicker::before{
+  content:'';
+  display:inline-block;
+  width:16px;height:1px;
+  background:var(--ink-3);
+}
+
+.masthead-name{
+  font-family:var(--serif);
+  font-size:clamp(3rem,7vw,5.8rem);
+  font-weight:400;
+  line-height:0.92;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+
+.masthead-name .italic{font-weight:300}
+
+.masthead-right{
+  padding:24px 0 28px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.info-row{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  font-size:11px;
+  color:var(--ink-3);
+  letter-spacing:0.04em;
+  padding:3px 0;
+}
+
+.info-key{
+  width:56px;
+  flex-shrink:0;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-size:8.5px;
+}
+
+.info-val{color:var(--ink-2)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.info-val.active{
+  color:var(--red);
+  font-weight:500;
+}
+.blink-dot{
+  display:inline-block;
+  animation:blink 1.2s step-end infinite;
+}
+
+/* ── TOP RULE BAR ── */
+.rule-bar{
+  height:3px;
+  background:var(--ink);
+  transform-origin:left;
+  transform:scaleX(0);
+  animation:ruleGrow 0.9s cubic-bezier(0.16,1,0.3,1) 0.05s forwards;
+}
+
+
+
+/* ── PILLS ── */
+.pill-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:18px;
+}
+
+.pill{
+  font-size:9.5px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  border:1px solid var(--ink-5);
+  padding:5px 11px;
+  transition:border-color 0.15s,color 0.15s;
+}
+
+.pill:hover{
+  border-color:var(--red);
+  color:var(--red);
+}
+
+/* ── INTRO ── */
+.intro-row{
+  display:flex;
+  flex-direction:column;
+  border-bottom:var(--rule);
+}
+
+.intro-left{
+  padding:36px 48px;
+  border-bottom:var(--rule);
+}
+
+.intro-text{
+  font-family:var(--serif);
+  font-size:1.15rem;
+  line-height:1.65;
+  color:var(--ink-2);
+  font-weight:400;
+  max-width:480px;
+}
+
+
+
+
+
+/* ── INDEX LABEL ── */
+.index-label{
+  display:flex;
+  align-items:center;
+  padding:0 48px;
+  height:32px;
+  border-bottom:var(--rule);
+  gap:16px;
+  background:var(--ink-5);
+}
+
+.index-label-text{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+
+.index-label-line{
+  flex:1;height:1px;
+  background:var(--ink-4);
+}
+
+/* ── STAGES ── */
+.stages{display:flex;flex-direction:column}
+
+/* ── STAGE ── */
+.stage{
+  border-bottom:var(--rule);
+  opacity:0;
+}
+.stage.d1{animation:slideUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.3s forwards}
+.stage.d2{animation:slideUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.42s forwards}
+.stage.d3{animation:slideUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.54s forwards}
+.stage.d4{animation:slideUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.66s forwards}
+
+/* ── STAGE BAR ── */
+.stage-bar{
+  width:100%;
+  display:grid;
+  grid-template-columns:96px 1fr auto;
+  align-items:center;
+  height:56px;
+  cursor:pointer;
+  background:transparent;
+  border:none;
+  font-family:var(--sans);
+  color:inherit;
+  padding:0;
+  position:relative;
+  transition:background 0.15s;
+  user-select:none;
+  text-align:left;
+}
+
+.stage-bar:hover{background:var(--ink-5)}
+.stage.open .stage-bar{background:var(--ink-5)}
+
+/* left number column */
+.sbar-num-col{
+  height:100%;
+  border-right:var(--rule);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  transition:background 0.15s;
+}
+
+/* red fill on open */
+.stage.open .sbar-num-col{
+  background:var(--red);
+  border-right-color:var(--red);
+}
+
+.sbar-n{
+  font-family:var(--serif);
+  font-size:1.5rem;
+  font-weight:400;
+  color:var(--ink-3);
+  line-height:1;
+  transition:color 0.2s;
+}
+
+.stage-bar:hover .sbar-n{color:var(--ink)}
+.stage.open .sbar-n{color:#fff}
+
+/* main area */
+.sbar-main{
+  padding:0 32px;
+  display:flex;
+  align-items:baseline;
+  gap:20px;
+}
+
+.sbar-title{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  font-weight:400;
+  color:var(--ink-2);
+  letter-spacing:-0.01em;
+  transition:color 0.15s;
+  line-height:1;
+}
+
+.stage-bar:hover .sbar-title,
+.stage.open .sbar-title{color:var(--ink)}
+
+.sbar-sub{
+  font-size:10px;
+  font-weight:400;
+  color:var(--ink-3);
+  letter-spacing:0.06em;
+  font-style:italic;
+  font-family:var(--serif);
+}
+
+/* right */
+.sbar-right{
+  height:100%;
+  border-left:var(--rule);
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:0 28px;
+  min-width:180px;
+}
+
+.sbar-count{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  flex:1;
+  transition:color 0.15s;
+}
+.stage.open .sbar-count{color:var(--ink)}
+
+.sbar-toggle{
+  font-size:11px;
+  font-weight:300;
+  color:var(--ink-3);
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),color 0.15s;
+  line-height:1;
+  flex-shrink:0;
+}
+.stage.open .sbar-toggle{transform:rotate(45deg);color:var(--red)}
+
+/* ── STAGE PANEL ── */
+.stage-panel{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.stage.open .stage-panel{max-height:3000px}
+
+.stage-panel-inner{
+  border-top:var(--rule);
+  display:grid;
+  grid-template-columns:96px 1fr;
+}
+
+/* left spine */
+.panel-spine{
+  border-right:var(--rule);
+  padding:28px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.spine-stage-n{
+  font-family:var(--serif);
+  font-size:2rem;
+  font-weight:400;
+  color:var(--ink-4);
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  letter-spacing:0.02em;
+}
+
+.spine-line{
+  width:1px;flex:1;
+  background:var(--ink-5);
+  min-height:20px;
+}
+
+/* content */
+.panel-content{
+  padding:32px 48px 40px;
+}
+
+.panel-desc{
+  font-size:0.98rem;
+  color:var(--ink-2);
+  line-height:1.75;
+  max-width:520px;
+  margin-bottom:32px;
+  font-weight:300;
+}
+
+/* ── PROJECT GRID ── */
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:0;
+  border:var(--rule);
+}
+
+/* ── PROJECT CARD ── */
+.pcard{
+  padding:22px 22px 20px;
+  border-right:var(--rule);
+  border-bottom:var(--rule);
+  cursor:pointer;
+  position:relative;
+  transition:background 0.15s;
+  background:var(--bg);
+}
+
+.pcard:hover{background:#fff}
+
+/* removes double border on last col */
+.pcard:nth-child(3n){border-right:none}
+
+/* top red rule slides in on hover */
+.pcard::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--red);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.pcard:hover::before{transform:scaleX(1)}
+
+.card-index{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ink-4);
+  margin-bottom:12px;
+  transition:color 0.15s;
+}
+.pcard:hover .card-index{color:var(--red)}
+
+.card-title{
+  font-family:var(--serif);
+  font-size:1.1rem;
+  font-weight:400;
+  color:var(--ink);
+  margin-bottom:8px;
+  line-height:1.2;
+  letter-spacing:-0.01em;
+  transition:color 0.15s;
+}
+.pcard:hover .card-title{color:var(--ink)}
+
+.card-sum{
+  font-size:11px;
+  color:var(--ink-3);
+  line-height:1.65;
+  margin-bottom:14px;
+  font-weight:400;
+}
+
+.card-tech{
+  display:flex;flex-wrap:wrap;gap:4px;
+  margin-bottom:14px;
+}
+.ttag{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  border:1px solid var(--ink-5);
+  padding:2px 7px;
+  transition:border-color 0.15s,color 0.15s;
+}
+.pcard:hover .ttag{border-color:var(--ink-4);color:var(--ink-2)}
+
+.card-cta{
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--red);
+  display:flex;
+  align-items:center;
+  gap:6px;
+  opacity:0;
+  transition:opacity 0.15s;
+}
+.card-cta::after{content:'→'}
+.pcard:hover .card-cta{opacity:1}
+
+/* ── MODAL ── */
+.moverlay{
+  position:fixed;inset:0;
+  background:rgba(250,250,248,0.88);
+  backdrop-filter:blur(4px);
+  z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.2s;
+}
+.moverlay.active{opacity:1;pointer-events:all}
+
+.modal{
+  background:var(--bg);
+  border:var(--rule-strong);
+  width:100%;max-width:680px;
+  max-height:88vh;
+  overflow-y:auto;
+  transform:translateY(12px);
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  scrollbar-width:thin;
+  scrollbar-color:var(--ink-4) transparent;
+}
+.modal::-webkit-scrollbar{width:3px}
+.modal::-webkit-scrollbar-thumb{background:var(--ink-4)}
+.moverlay.active .modal{transform:translateY(0)}
+
+/* red top rule on modal */
+.modal-top-rule{height:3px;background:var(--red)}
+
+.mtopbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  padding:0 24px;
+  height:40px;
+  border-bottom:var(--rule);
+  position:sticky;top:3px;
+  background:var(--bg);
+  z-index:2;
+}
+
+.mtopbar-label{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+
+.mclose{
+  width:28px;height:28px;
+  background:none;
+  border:1px solid var(--ink-4);
+  color:var(--ink-3);
+  cursor:pointer;
+  font-size:14px;
+  font-weight:300;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;
+  font-family:var(--sans);
+}
+.mclose:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* modal layout — two col */
+.mbody{
+  display:grid;
+  grid-template-columns:3px 1fr;
+}
+
+.mbody-stripe{background:var(--red)}
+
+.mbody-content{padding:28px 28px 40px}
+
+.m-stage-label{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:10px;
+}
+
+.mtitle{
+  font-family:var(--serif);
+  font-size:clamp(1.7rem,4vw,2.6rem);
+  font-weight:400;
+  color:var(--ink);
+  line-height:1;
+  margin-bottom:28px;
+  letter-spacing:-0.02em;
+}
+
+.msec{margin-bottom:24px}
+
+.msec-head{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  padding-bottom:8px;
+  border-bottom:var(--rule);
+  margin-bottom:12px;
+}
+
+.msec p{
+  font-family:var(--serif);
+  font-size:0.95rem;
+  color:var(--ink-2);
+  line-height:1.8;
+  font-weight:400;
+}
+
+.mlist{list-style:none;display:flex;flex-direction:column;gap:6px}
+.mlist li{
+  font-size:11px;color:var(--ink-2);line-height:1.65;
+  padding-left:16px;position:relative;
+}
+.mlist li::before{
+  content:'—';
+  position:absolute;left:0;
+  color:var(--red);
+  font-size:11px;
+}
+
+.mtech{display:flex;flex-wrap:wrap;gap:6px}
+.mpill{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  border:1px solid var(--ink-4);
+  padding:4px 12px;
+  background:transparent;
+  transition:all 0.15s;
+}
+.mpill:hover{border-color:var(--ink);color:var(--ink)}
+
+/* ── BOTTOM SECTION ── */
+.bottom-section{
+  display:flex;
+  flex-direction:column;
+  border-top:var(--rule-strong);
+}
+
+.bottom-cell{
+  padding:48px 48px 56px;
+}
+
+.bottom-cell:first-child{
+  border-bottom:var(--rule);
+}
+
+.bottom-cell-kicker{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.bottom-cell-kicker::before{
+  content:'';
+  display:inline-block;
+  width:16px;height:1px;
+  background:var(--ink-3);
+}
+
+.bottom-cell-title{
+  font-size:1.6rem;
+  font-weight:300;
+  color:var(--ink);
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  margin-bottom:20px;
+}
+
+.bottom-cell-body{
+  font-size:0.85rem;
+  color:var(--ink-2);
+  line-height:1.75;
+  font-weight:300;
+  margin-bottom:28px;
+  max-width:340px;
+}
+
+.bottom-links{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.bottom-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:var(--rule);
+  text-decoration:none;
+  color:var(--ink);
+  transition:color 0.15s;
+  cursor:pointer;
+}
+
+.bottom-link:first-child{border-top:var(--rule)}
+.bottom-link:hover{color:var(--red)}
+.bottom-link:hover .bottom-link-arrow{transform:translateX(3px)}
+
+.bottom-link-label{
+  font-size:0.82rem;
+  font-weight:400;
+  letter-spacing:0.02em;
+}
+
+.bottom-link-sub{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+
+.bottom-link-arrow{
+  font-size:0.85rem;
+  color:var(--ink-3);
+  transition:transform 0.2s, color 0.15s;
+}
+.bottom-link:hover .bottom-link-arrow{color:var(--red)}
+
+.currently-item{
+  padding:14px 0;
+  border-bottom:var(--rule);
+}
+.currently-item:first-child{border-top:var(--rule)}
+
+.currently-tag{
+  font-size:8.5px;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:5px;
+}
+
+.currently-text{
+  font-size:0.82rem;
+  color:var(--ink-2);
+  line-height:1.6;
+  font-weight:300;
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:var(--rule-strong);
+  display:grid;
+  grid-template-columns:96px 1fr auto;
+  align-items:center;
+}
+
+.footer-left{
+  height:100%;
+  border-right:var(--rule);
+  display:flex;align-items:center;justify-content:center;
+}
+
+.footer-left-inner{
+  width:3px;height:24px;background:var(--red);
+}
+
+.footer-center{
+  padding:18px 32px;
+  font-size:0.88rem;
+  color:var(--ink-2);
+  font-weight:300;
+}
+
+.footer-right{
+  padding:18px 48px;
+  border-left:var(--rule);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .masthead{padding:0 20px}
+  .masthead-left{padding-bottom:20px}
+  .masthead-right{padding-top:20px}
+  .index-label{padding:0 20px}
+  .intro-row{grid-template-columns:1fr}
+  .intro-left{padding:24px 20px}
+  .stage-panel-inner{grid-template-columns:1fr}
+  .panel-spine{display:none}
+  .panel-content{padding:24px 20px 32px}
+  .stage-bar{grid-template-columns:60px 1fr auto}
+  .sbar-right{min-width:120px;padding:0 16px}
+  .sbar-sub{display:none}
+  footer{grid-template-columns:1fr auto}
+  .bottom-cell{padding:32px 20px 40px}
+  .bottom-cell:first-child{border-right:none}
+  .footer-left{display:none}
+  .footer-center{padding:16px 20px}
+  .footer-right{padding:16px 20px;border-left:none;border-top:var(--rule)}
+  .mbody-content{padding:20px 18px 32px}
+  .pcard:nth-child(3n){border-right:var(--rule)}
+}
+</style>
+</head>
+<body>
+
+<!-- RED TOP RULE -->
+<div class="rule-bar"></div>
+
+<!-- MASTHEAD -->
+<div class="masthead fi d1">
+  <div class="masthead-left">
+    <div class="masthead-kicker">Building AI systems to make your life easier.</div>
+    <div class="masthead-name">
+      <div>Green</div>
+      <div class="italic">Worm</div>
+    </div>
+  </div>
+  <div class="masthead-right fi d2">
+    <div class="info-row"><span class="info-key">Role</span><span class="info-val">Software Engineer &amp; Data Developer</span></div>
+    <div class="info-row"><span class="info-key">Focus</span><span class="info-val">Software · Data · AI / ML</span></div>
+    <div class="info-row" style="align-items:baseline">
+      <span class="info-key" style="padding-top:0">Services</span>
+      <span class="info-val">Build custom software · Automate workflows · Data pipelines &amp; analytics · AI / LLM integration · Consulting · Freelance projects</span>
+    </div>
+    <div class="info-row"><span class="info-key">Status</span><span class="info-val active">● Available for work</span></div>
+  </div>
+</div>
+
+
+
+<!-- INTRO ROW -->
+<div class="intro-row fi d3">
+  <div class="intro-left">
+    <p class="intro-text">A documented progression through software and data work — from first principles to production systems. Four stages. Twelve projects. Each one a genuine step forward.</p>
+  </div>
+
+</div>
+
+<!-- INDEX LABEL -->
+<div class="index-label fi d4">
+  <span class="index-label-text">Project Development</span>
+  <div class="index-label-line"></div>
+  <span class="index-label-text">Click to expand</span>
+</div>
+
+<!-- STAGES -->
+<div class="stages">
+
+  <div class="stage d1" id="s0">
+    <button class="stage-bar" onclick="toggle('s0')">
+      <div class="sbar-num-col"><span class="sbar-n">01</span></div>
+      <div class="sbar-main">
+        <span class="sbar-title">Foundations</span>
+        <span class="sbar-sub">Beginner — syntax, structure, first deployments</span>
+      </div>
+      <div class="sbar-right">
+        <span class="sbar-count">3 Projects</span>
+        <span class="sbar-toggle" id="t-s0">+</span>
+      </div>
+    </button>
+    <div class="stage-panel">
+      <div class="stage-panel-inner">
+        <div class="panel-spine">
+          <div class="spine-line"></div>
+          <div class="spine-stage-n">01</div>
+          <div class="spine-line"></div>
+        </div>
+        <div class="panel-content">
+          <p class="panel-desc">The beginning. Learning how to think like a programmer — understanding syntax, the browser, data structures and actually shipping something. These projects are small, but starting is the hardest part.</p>
+          <div class="project-grid" id="g-s0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage d2" id="s1">
+    <button class="stage-bar" onclick="toggle('s1')">
+      <div class="sbar-num-col"><span class="sbar-n">02</span></div>
+      <div class="sbar-main">
+        <span class="sbar-title">Building Up</span>
+        <span class="sbar-sub">Intermediate — frameworks, APIs, full-stack integration</span>
+      </div>
+      <div class="sbar-right">
+        <span class="sbar-count">3 Projects</span>
+        <span class="sbar-toggle" id="t-s1">+</span>
+      </div>
+    </button>
+    <div class="stage-panel">
+      <div class="stage-panel-inner">
+        <div class="panel-spine">
+          <div class="spine-line"></div>
+          <div class="spine-stage-n">02</div>
+          <div class="spine-line"></div>
+        </div>
+        <div class="panel-content">
+          <p class="panel-desc">Moving beyond basics. Real frameworks, backend reasoning and end-to-end data flows. Architecture begins to matter and projects start to have genuine opinions about how they are built.</p>
+          <div class="project-grid" id="g-s1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage d3" id="s2">
+    <button class="stage-bar" onclick="toggle('s2')">
+      <div class="sbar-num-col"><span class="sbar-n">03</span></div>
+      <div class="sbar-main">
+        <span class="sbar-title">Advanced</span>
+        <span class="sbar-sub">Proficient — production systems, data pipelines, ML</span>
+      </div>
+      <div class="sbar-right">
+        <span class="sbar-count">3 Projects</span>
+        <span class="sbar-toggle" id="t-s2">+</span>
+      </div>
+    </button>
+    <div class="stage-panel">
+      <div class="stage-panel-inner">
+        <div class="panel-spine">
+          <div class="spine-line"></div>
+          <div class="spine-stage-n">03</div>
+          <div class="spine-line"></div>
+        </div>
+        <div class="panel-content">
+          <p class="panel-desc">Production-grade thinking. Scalable systems, real data engineering and deliberate abstraction. Trade-offs are understood and every decision carries a reason behind it.</p>
+          <div class="project-grid" id="g-s2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage d4" id="s3">
+    <button class="stage-bar" onclick="toggle('s3')">
+      <div class="sbar-num-col"><span class="sbar-n">04</span></div>
+      <div class="sbar-main">
+        <span class="sbar-title">Expert</span>
+        <span class="sbar-sub">Senior — AI / ML, system design, full ownership</span>
+      </div>
+      <div class="sbar-right">
+        <span class="sbar-count">3 Projects</span>
+        <span class="sbar-toggle" id="t-s3">+</span>
+      </div>
+    </button>
+    <div class="stage-panel">
+      <div class="stage-panel-inner">
+        <div class="panel-spine">
+          <div class="spine-line"></div>
+          <div class="spine-stage-n">04</div>
+          <div class="spine-line"></div>
+        </div>
+        <div class="panel-content">
+          <p class="panel-desc">Complete ownership of complex systems. AI-integrated architectures, high-throughput data platforms and projects that required deep domain expertise from specification through to deployment.</p>
+          <div class="project-grid" id="g-s3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM SECTION -->
+<div class="bottom-section fi d7">
+
+  <div class="bottom-cell">
+    <div class="bottom-cell-kicker">Currently working on</div>
+    <div class="bottom-cell-title">What's on<br>the bench</div>
+    <div class="currently-item">
+      <div class="currently-tag">Building</div>
+      <div class="currently-text">Describe your current project here — what it is and why you're building it.</div>
+    </div>
+    <div class="currently-item">
+      <div class="currently-tag">Learning</div>
+      <div class="currently-text">Something you're actively studying or exploring right now.</div>
+    </div>
+    <div class="currently-item">
+      <div class="currently-tag">Reading</div>
+      <div class="currently-text">A book, article series, or resource you're working through.</div>
+    </div>
+  </div>
+
+  <div class="bottom-cell">
+    <div class="bottom-cell-kicker">Get in touch</div>
+    <div class="bottom-cell-title">Let's talk<br>about something</div>
+    <p class="bottom-cell-body">Open to interesting projects, collaborations and conversations. If something here caught your attention, reach out.</p>
+    <div class="bottom-links">
+      <a class="bottom-link" href="#" onclick="window.location='mai'+'lto:your@email.com';return false;">
+        <span class="bottom-link-label"><span class="__cf_email__" data-cfemail="8ef7e1fbfcceebe3efe7e2a0ede1e3">[email&#160;protected]</span></span>
+        <span class="bottom-link-arrow">→</span>
+      </a>
+      <a class="bottom-link" href="https://github.com/greenworm" target="_blank">
+        <div><div class="bottom-link-label">GitHub</div><div class="bottom-link-sub">github.com/greenworm</div></div>
+        <span class="bottom-link-arrow">→</span>
+      </a>
+      <a class="bottom-link" href="https://linkedin.com/in/greenworm" target="_blank">
+        <div><div class="bottom-link-label">LinkedIn</div><div class="bottom-link-sub">linkedin.com/in/greenworm</div></div>
+        <span class="bottom-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="fi d8">
+  <div class="footer-left"><div class="footer-left-inner"></div></div>
+  <div class="footer-center">Green Worm — Building AI systems to make your life easier.</div>
+  <div class="footer-right">© 2024</div>
+</footer>
+
+<!-- MODAL -->
+<div class="moverlay" id="moverlay" onclick="ovClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-top-rule"></div>
+    <div class="mtopbar">
+      <span class="mtopbar-label" id="mtoplabel">Project Detail</span>
+      <button class="mclose" onclick="closeModal()">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="mbody-stripe"></div>
+      <div class="mbody-content">
+        <div class="m-stage-label" id="mstagel"></div>
+        <div class="mtitle" id="mtitle"></div>
+        <div class="msec">
+          <div class="msec-head">About</div>
+          <p id="mabout"></p>
+        </div>
+        <div class="msec">
+          <div class="msec-head">What I Learnt</div>
+          <ul class="mlist" id="mlearn"></ul>
+        </div>
+        <div class="msec">
+          <div class="msec-head">Systems &amp; Tools</div>
+          <div class="mtech" id="mtech"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// date
+
+
+const SLABELS = [
+  'Stage 01 — Foundations',
+  'Stage 02 — Building Up',
+  'Stage 03 — Advanced',
+  'Stage 04 — Expert'
+];
+
+const D = {
+  's0':[
+    {title:'Personal Landing Page',sum:'First static site — HTML & CSS only, deployed to GitHub Pages.',tech:['HTML5','CSS3','GitHub Pages'],about:'The first real thing built and shipped. A personal landing page with bio, links and a basic layout. No JavaScript, no frameworks — learning how browsers render content and deeply understanding the box model.',learn:['Semantic HTML structure and document flow','CSS box model, flexbox and responsive units','Deploying a static site via GitHub Pages','Why naming conventions matter from day one']},
+    {title:'CLI To-Do App',sum:'Python command-line task manager with persistent JSON storage.',tech:['Python','JSON','argparse','CLI'],about:'A todo application built entirely in the terminal. Tasks persisted to a JSON file between sessions. Simple in scope but pivotal for understanding how programs manage state and how data outlives a running process.',learn:['File I/O and JSON serialisation in Python','CLI argument parsing with argparse','Program state and data persistence fundamentals','Error handling and graceful user feedback']},
+    {title:'Weather Widget',sum:'First API integration — live weather data fetched and rendered in-browser.',tech:['JavaScript','Fetch API','REST','CSS'],about:'First time consuming an external REST API. Input a city, call a weather endpoint, parse the JSON and render conditions. The moment async/await clicked and the page updated without a reload was genuinely transformative.',learn:['Fetch API and async/await fundamentals','Parsing and rendering JSON in the DOM','Loading, error and empty state UI patterns','API key management and basic security hygiene']},
+  ],
+  's1':[
+    {title:'Budget Tracker',sum:'Full CRUD React app with categories, charts and localStorage persistence.',tech:['React','Chart.js','LocalStorage','CSS Modules'],about:'First serious React project with proper component architecture. Users log income and expenses, assign categories and view balance over time. This cemented understanding of state management and how component trees work.',learn:['React component architecture and unidirectional data flow','useState and useEffect hooks in depth','Lifting state across component hierarchies','Integrating Chart.js visualisations within React']},
+    {title:'REST API + Dashboard',sum:'Node/Express REST API backed by PostgreSQL with a full React frontend.',tech:['Node.js','Express','PostgreSQL','React'],about:'First full-stack build. Designed REST routes with full CRUD, backed by a real database, then built a React frontend consuming those endpoints. The moment front and back connected as a single system was a genuine step change.',learn:['RESTful API design principles and HTTP verb semantics','Express middleware, routing and error handling','SQL schema design and relational queries','Environment variables, secrets and deployment basics']},
+    {title:'Real-Time Chat App',sum:'WebSocket chat with named rooms, message history and live user presence.',tech:['Socket.io','Node.js','React','Redis'],about:'Built to understand real-time communication beyond request/response. Users join named rooms, send messages and see who is online. Socket.io events, room management and concurrent connections required a completely new mental model.',learn:['WebSocket protocol vs HTTP polling','Socket.io events, rooms and namespaces','Managing connected user state server-side','Race conditions and basic concurrency thinking']},
+  ],
+  's2':[
+    {title:'Data Pipeline Orchestrator',sum:'ETL pipeline with scheduling, retry logic, monitoring and Slack alerting.',tech:['Python','Apache Airflow','PostgreSQL','Docker','Slack API'],about:'A real ETL pipeline using Airflow DAGs. Pulls from multiple external APIs, transforms and loads into a data warehouse, with retry logic and Slack failure alerts. First time thinking at genuine infrastructure scale.',learn:['DAG design and Airflow task dependency graphs','Idempotent pipeline design for safe re-runs','Monitoring and alerting threshold strategy','Docker-based reproducible development environments']},
+    {title:'SaaS Starter Kit',sum:'Full-stack boilerplate — auth, Stripe billing, team management and RBAC.',tech:['Next.js','Supabase','Stripe','TypeScript','Vercel'],about:'A production-ready SaaS foundation. Supabase auth with magic links, Stripe subscriptions and webhook handling, team invites with per-seat billing and role-based access control. Built to understand what shipping a real product actually requires.',learn:['Next.js App Router architecture and server components','Stripe subscription lifecycle and webhook verification','Row-level security policies in PostgreSQL','TypeScript generics and strict mode at scale']},
+    {title:'ML Feature Store',sum:'Centralised feature registry with versioning, low-latency serving and lineage.',tech:['Python','FastAPI','Redis','PostgreSQL','Pandas'],about:'A lightweight feature store designed to eliminate duplication across ML experiments. Features registered with metadata, versioned and served at low latency via FastAPI. Lineage tracking records which models depend on which feature versions.',learn:['Feature engineering reusability and governance','FastAPI async patterns and dependency injection','Redis for sub-millisecond feature serving','Data lineage tracking and ML reproducibility']},
+  ],
+  's3':[
+    {title:'AI Document Intelligence',sum:'PDF ingestion, LLM extraction, vector search and cited structured responses.',tech:['Next.js','OpenAI API','Pinecone','LangChain','TypeScript'],about:'End-to-end document intelligence. PDFs chunked, embedded and stored in a vector database. Natural language queries return structured, cited answers with streaming responses for minimal perceived latency.',learn:['RAG architecture, chunking strategies and overlap tuning','Vector embeddings and semantic similarity search','Prompt engineering for grounded structured outputs','Token optimisation and API cost management']},
+    {title:'Real-Time Analytics Platform',sum:'High-throughput event streaming with live dashboards and ML anomaly detection.',tech:['Apache Kafka','ClickHouse','React','Python','Grafana'],about:'Event-driven analytics platform ingesting high-volume streams. Kafka handles ingestion, ClickHouse provides fast OLAP queries, and a React dashboard renders live metrics. An ML model detects statistical anomalies and triggers automated alerts.',learn:['Kafka partitioning, consumer groups and offset management','ClickHouse columnar storage and query optimisation','Stream vs batch processing trade-off analysis','Designing for observability from day one']},
+    {title:'Dev Analytics Dashboard',sum:'GitHub-connected analytics — contribution heatmaps, language trends, PR velocity.',tech:['Next.js','GitHub API','D3.js','TypeScript','Vercel ISR'],about:'Pulls from the GitHub API and renders rich development pattern visualisations — contribution heatmaps, language distribution over time, PR review velocity and code churn. ISR caching keeps it fresh within API rate limits.',learn:['GitHub REST API pagination and OAuth application flows','D3.js custom visualisation from primitives','Incremental Static Regeneration as a caching strategy','Data normalisation and reusable chart component design']},
+  ],
+};
+
+Object.entries(D).forEach(([sid, projs], si) => {
+  const grid = document.getElementById('g-' + sid);
+  projs.forEach((p, i) => {
+    const c = document.createElement('div');
+    c.className = 'pcard';
+    c.innerHTML = `
+      <div class="card-index">0${si+1} / ${String.fromCharCode(65+i)}</div>
+      <div class="card-title">${p.title}</div>
+      <p class="card-sum">${p.sum}</p>
+      <div class="card-tech">${p.tech.map(t=>`<span class="ttag">${t}</span>`).join('')}</div>
+      <div class="card-cta">View project</div>
+    `;
+    c.addEventListener('click', () => openModal(sid, i, si));
+    grid.appendChild(c);
+  });
+});
+
+function toggle(id) {
+  const el = document.getElementById(id);
+  const open = el.classList.contains('open');
+  document.querySelectorAll('.stage').forEach((s,i) => {
+    s.classList.remove('open');
+    document.getElementById('t-s'+i).textContent = '+';
+  });
+  if (!open) {
+    el.classList.add('open');
+    const si = parseInt(id.replace('s',''));
+    document.getElementById('t-' + id).textContent = '×';
+    // scroll stage into view gently
+    setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+  }
+}
+
+function openModal(sid, i, si) {
+  const p = D[sid][i];
+  document.getElementById('mtoplabel').textContent = `${SLABELS[si]} — ${String.fromCharCode(65+i)}`;
+  document.getElementById('mstagel').textContent = SLABELS[si];
+  document.getElementById('mtitle').textContent = p.title;
+  document.getElementById('mabout').textContent = p.about;
+  document.getElementById('mlearn').innerHTML = p.learn.map(l => `<li>${l}</li>`).join('');
+  document.getElementById('mtech').innerHTML = p.tech.map(t => `<span class="mpill">${t}</span>`).join('');
+  document.getElementById('moverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function ovClick(e) { if (e.target === document.getElementById('moverlay')) closeModal(); }
+function closeModal() { document.getElementById('moverlay').classList.remove('active'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
