@@ -29,8 +29,8 @@
 body.dark{
   --bg:#141414;
   --ink:#f0efeb;
-  --ink-2:#c0bfbb;
-  --ink-3:#666662;
+  --ink-2:#d8d7d3;
+  --ink-3:#999895;
   --ink-4:#333330;
   --ink-5:#222220;
   --rule:1px solid #2a2a28;
@@ -155,7 +155,7 @@ body{
   width:80px;
   flex-shrink:0;
   font-weight:600;
-  letter-spacing:0.12em;
+  letter-spacing:0.08em;
   text-transform:uppercase;
   font-size:13px;
 }
@@ -542,7 +542,7 @@ body{
 /* ── MODAL ── */
 .moverlay{
   position:fixed;inset:0;
-  background:rgba(250,250,248,0.88);
+  background:rgba(20,20,20,0.6);
   backdrop-filter:blur(4px);
   z-index:500;
   display:flex;align-items:center;justify-content:center;
@@ -606,11 +606,8 @@ body{
 
 /* modal layout — two col */
 .mbody{
-  display:grid;
-  grid-template-columns:3px 1fr;
+  padding:28px 28px 40px;
 }
-
-.mbody-stripe{background:var(--red)}
 
 .mbody-content{padding:28px 28px 40px}
 
@@ -668,9 +665,9 @@ body{
 
 .mtech{display:flex;flex-wrap:wrap;gap:6px}
 .mpill{
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:0.12em;
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:0.08em;
   text-transform:uppercase;
   color:var(--ink-2);
   border:1px solid var(--ink-4);
@@ -1071,7 +1068,6 @@ footer{
       <button class="mclose" onclick="closeModal()">✕</button>
     </div>
     <div class="mbody">
-      <div class="mbody-stripe"></div>
       <div class="mbody-content">
         <div class="m-stage-label" id="mstagel"></div>
         <div class="mtitle" id="mtitle"></div>
